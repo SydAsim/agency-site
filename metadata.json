@@ -1,0 +1,6 @@
+{
+  "name": "Convix Software",
+  "description": "Full-viewport hero section and interactive dashboard preview for Convix Software PR-agency SaaS",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
