@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { DashboardPreview } from './components/DashboardPreview';
+import { LogoTicker } from './components/LogoTicker';
+import { FeaturesSection } from './components/FeaturesSection';
+import { PitchStudio } from './components/PitchStudio';
+import { CalculatorSection } from './components/CalculatorSection';
+import { TestimonialsSection } from './components/TestimonialsSection';
+import { PricingSection } from './components/PricingSection';
+import { FaqSection } from './components/FaqSection';
+import { CtaBanner } from './components/CtaBanner';
+import { Footer } from './components/Footer';
+import { EarlyAccessModal } from './components/EarlyAccessModal';
 
 export function App() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
-    <div className="min-h-screen w-full bg-[#ededed] p-3 sm:p-4 font-['Inter',sans-serif] text-neutral-900 selection:bg-[#ef4d23] selection:text-white">
-      {/* Hero Container */}
-      <div className="relative w-full h-[calc(100vh-24px)] sm:h-[calc(100vh-32px)] overflow-hidden bg-[#d9d9d9] rounded-2xl sm:rounded-3xl flex flex-col justify-between">
+    <div
+      id="home"
+      className="min-h-screen w-full bg-[#ededed] p-3 sm:p-4 font-['Inter',sans-serif] text-neutral-900 selection:bg-[#ef4d23] selection:text-white flex flex-col gap-3 sm:gap-4 scroll-smooth"
+    >
+      {/* 1. Full-Viewport Hero Container */}
+      <div className="relative w-full min-h-[calc(100vh-24px)] sm:min-h-[calc(100vh-32px)] overflow-hidden bg-[#d9d9d9] rounded-2xl sm:rounded-3xl flex flex-col justify-between shadow-xs">
         {/* Background Video */}
         <video
           autoPlay
@@ -33,9 +48,9 @@ export function App() {
         <div className="absolute inset-0 bg-white/10 pointer-events-none" />
 
         {/* Foreground Content Wrapper */}
-        <div className="relative z-10 flex flex-col h-full overflow-y-auto">
-          {/* Navbar */}
-          <Navbar />
+        <div className="relative z-10 flex flex-col h-full justify-between">
+          {/* Floating Pill Navbar */}
+          <Navbar onOpenEarlyAccess={() => setModalOpen(true)} />
 
           {/* Hero Content */}
           <div className="flex flex-col items-center px-4 pt-10 sm:pt-16 pb-8 sm:pb-12 text-center shrink-0">
@@ -82,6 +97,7 @@ export function App() {
             {/* CTA button */}
             <button
               type="button"
+              onClick={() => setModalOpen(true)}
               className="mt-6 sm:mt-8 inline-flex items-center gap-3 bg-[#0b0f1a] hover:bg-[#1a2235] text-white rounded-full pl-6 sm:pl-7 pr-2 py-2 sm:py-2.5 text-[14px] font-medium shadow-md transition-all cursor-pointer group"
             >
               <span>Get Started</span>
@@ -97,6 +113,36 @@ export function App() {
           </div>
         </div>
       </div>
+
+      {/* 2. Client Agencies & Trust Logos */}
+      <LogoTicker />
+
+      {/* 3. Core Capabilities Bento Section */}
+      <FeaturesSection onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* 4. Interactive Live Pitch Studio */}
+      <PitchStudio onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* 5. Interactive Agency ROI & Capacity Calculator */}
+      <CalculatorSection onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* 6. Partner Proof & Customer Stories */}
+      <TestimonialsSection onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* 7. Transparent Pricing Tiers */}
+      <PricingSection onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* 8. Frequently Asked Questions */}
+      <FaqSection onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* 9. High-Impact Closing CTA Banner */}
+      <CtaBanner onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* 10. Minimalist Editorial Footer */}
+      <Footer onOpenEarlyAccess={() => setModalOpen(true)} />
+
+      {/* Interactive Modal */}
+      <EarlyAccessModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 }

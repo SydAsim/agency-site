@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronRight, ShoppingCart, Menu, X } from 'lucide-react';
 
-export function Navbar() {
+interface NavbarProps {
+  onOpenEarlyAccess?: () => void;
+}
+
+export function Navbar({ onOpenEarlyAccess }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="flex justify-center pt-4 sm:pt-6 px-3 sm:px-4 relative z-30">
       <div className="bg-white rounded-full shadow-sm border border-neutral-200 pl-2 pr-2 py-2 w-full max-w-[760px] relative flex items-center">
         {/* Logo */}
-        <div className="flex items-center gap-2 pl-2 shrink-0">
+        <a href="#home" className="flex items-center gap-2 pl-2 shrink-0 cursor-pointer" aria-label="Convix Home">
           <svg viewBox="0 0 32 32" className="w-7 h-7 sm:w-8 sm:h-8 shrink-0">
             <circle cx="16" cy="16" r="3.5" fill="#ef4d23" />
             <circle cx="26" cy="16" r="3.5" fill="#ef4d23" />
@@ -20,7 +24,7 @@ export function Navbar() {
             <circle cx="16" cy="6" r="3.5" fill="#ef4d23" />
             <circle cx="23.07" cy="8.93" r="3.5" fill="#ef4d23" />
           </svg>
-        </div>
+        </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6 ml-8 text-[14px]">
@@ -56,6 +60,7 @@ export function Navbar() {
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
           <button
             type="button"
+            onClick={onOpenEarlyAccess}
             className="hidden sm:flex items-center justify-center p-2 text-neutral-700 hover:text-neutral-900 transition-colors cursor-pointer"
             aria-label="Shopping Cart"
           >
@@ -64,6 +69,7 @@ export function Navbar() {
 
           <button
             type="button"
+            onClick={onOpenEarlyAccess}
             className="bg-[#ef4d23] hover:bg-[#d83f17] text-white rounded-full pl-4 sm:pl-5 pr-1.5 py-1.5 text-xs sm:text-[14px] font-medium flex items-center gap-2 transition-colors cursor-pointer"
           >
             <span>
@@ -116,13 +122,24 @@ export function Navbar() {
               onClick={() => setMenuOpen(false)}
               className="font-medium text-neutral-600 hover:text-neutral-900 py-1 flex items-center justify-between"
             >
-              Pages
+              Pages (Pricing & Plans)
               <ChevronDown className="w-3.5 h-3.5 text-[#ef4d23]" />
             </a>
+            <a
+              href="#calculator"
+              onClick={() => setMenuOpen(false)}
+              className="font-medium text-neutral-600 hover:text-neutral-900 py-1"
+            >
+              ROI Calculator
+            </a>
             <div className="pt-2 border-t border-neutral-100 flex items-center justify-between">
-              <span className="text-neutral-600 font-medium">Cart</span>
+              <span className="text-neutral-600 font-medium">Cart / Sandbox</span>
               <button
                 type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenEarlyAccess?.();
+                }}
                 className="p-1 text-neutral-700 hover:text-neutral-900"
                 aria-label="Shopping Cart"
               >
